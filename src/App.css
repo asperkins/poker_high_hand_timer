@@ -12,7 +12,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +39,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#rotate-text {
+  width: 25px;
+  height: 100%;
+  font-size: 40px;
+  transform: rotate(270deg);
 }
