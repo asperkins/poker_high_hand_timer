@@ -67,13 +67,16 @@ const TimerButton = styled(Button)({
   "&:hover": {
     backgroundColor: "transparent"
   },
+  "& .MuiTouchRipple-root span":{
+    backgroundColor: 'transparent',
+  },
   padding: 0,
   width: '100%',
   height: 450,
   fontSize: 440
 });
 
-export default function App() {
+const App = () => {
   const Ref = useRef(null);
   const [timer, setTimer] = useState('99:99');
 
@@ -375,3 +378,4 @@ export default function App() {
     </ThemeProvider >
   );
 }
+export default App;
