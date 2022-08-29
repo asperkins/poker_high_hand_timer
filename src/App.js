@@ -26,7 +26,6 @@ try {
   console.log(error)
 }
 
-
 try {
   if (localStorage.getItem('sessionState') == null) {
     const sessionState = {
@@ -59,7 +58,6 @@ const TimerButton = styled(Button)({
   color: 'gold',
   backgroundColor: 'transparent',
   "&:hover": {
-    //you want this to be the same as the backgroundColor above
     backgroundColor: "transparent"
   },
   padding: 0,
@@ -74,13 +72,13 @@ const theme = createTheme({
   }
 });
 
-export default function SignIn() {
+export default function App() {
   const Ref = useRef(null);
   const [timer, setTimer] = useState('99:99');
 
   const getTimeRemaining = (e) => {
     let date = new Date();
-
+    /** Check if current time is within the promotion time frame */
     let startDate = new Date();
     startDate.setHours(String(activeStartTime).substring(0, 2));
     startDate.setMinutes(String(activeStartTime).substring(3, 5));
@@ -96,12 +94,10 @@ export default function SignIn() {
       seconds = 59 - date.getSeconds();
       minutes = sessionState.intervalTime - (date.getMinutes() % sessionState.intervalTime) - 1;
     }
-
     return {
       minutes, seconds
     };
   }
-
 
   const startTimer = () => {
     let { minutes, seconds } = getTimeRemaining();
@@ -109,7 +105,6 @@ export default function SignIn() {
       (minutes > 9 ? minutes : '0' + minutes) + ':'
       + (seconds > 9 ? seconds : '0' + seconds)
     )
-
   }
 
   const updateTimer = (e) => {
@@ -182,74 +177,31 @@ export default function SignIn() {
     );
   }
 
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container component="main" maxWidth="xxl" fullWidth
-        sx={{
-          // borderTop: "1px solid grey",
-          // borderRight: "1px solid grey",
-          // borderBottom: "1px solid grey",
-          // borderLeft: "1px solid grey",
-          // height: 250
-        }}
-      >
+      <Container component="main" maxWidth="xxl" fullWidth>
         <Grid container rowGap={2}
-          sx={{
-            // borderTop: "1px solid grey",
-            // borderRight: "1px solid grey",
-            // borderBottom: "1px solid grey",
-            // borderLeft: "1px solid grey",
-            // height: 250
-          }}
           direction="row"
           alignItems="center"
           justifyContent="center">
           <Grid item md={8}
             sx={{
-              // borderTop: "1px solid grey",
-              // borderRight: "1px solid grey",
-              // borderBottom: "1px solid grey",
-              // borderLeft: "1px solid grey",
-              // height: 250
               paddingLeft: 5,
             }}>
-            <TimerButton variant="contained" onClick={() => {
-              audio.loop = false;
-              //audio.play();
-            }}>{timer}</TimerButton>
+            <TimerButton variant="contained" onClick={() => { }}>{timer}</TimerButton>
           </Grid>
           <Grid item md={4}>
             <Grid container
               sx={{
-
-                // borderTop: "1px solid grey",
-                // borderRight: "1px solid grey",
-                // borderBottom: "1px solid grey",
-                // borderLeft: "1px solid grey",
-                // // height: 250
                 paddingTop: 0,
                 paddingLeft: 8,
                 paddingBottom: 4,
-                // width: 500
-              }}
-            // direction="column"
-            // alignItems="center"
-            // justifyContent="center"
-            >
+              }}>
               <Grid item md={12}
                 sx={{
-
-                  // borderTop: "1px solid grey",
-                  // borderRight: "1px solid grey",
-                  // borderBottom: "1px solid grey",
-                  // borderLeft: "1px solid grey",
-                  // // height: 250
                   paddingTop: 4,
-                  // paddingLeft: 8,
                   paddingBottom: 2,
-                  // width: 500
                 }}>
                 <TextField
                   id="select"
@@ -304,7 +256,6 @@ export default function SignIn() {
                   onChange={(e) => {
                     setActiveStartTime(e.target.value);
                   }}></TextField>
-
               </Grid>
               <Grid item sx={{
                 paddingTop: 5,
@@ -316,30 +267,11 @@ export default function SignIn() {
                   onChange={(e) => {
                     setActiveEndTime(e.target.value);
                   }}></TextField>
-
               </Grid>
-
             </Grid>
           </Grid>
-
-          <Grid item
-            sx={{
-              // borderTop: "1px solid grey",
-              // borderRight: "1px solid grey",
-              // borderBottom: "1px solid grey",
-              // borderLeft: "1px solid grey",
-              // height: 250
-            }}
-          >
+          <Grid item>
             <Grid container rowSpacing={2}
-              sx={{
-                // borderTop: "1px solid grey",
-                // borderRight: "1px solid grey",
-                // borderBottom: "1px solid grey",
-                // borderLeft: "1px solid grey",
-                // height: 250
-              }}
-
               direction="row"
               alignItems="center"
               justifyContent="center"
@@ -356,16 +288,7 @@ export default function SignIn() {
               </Grid>
               <Grid item md={1.58}
                 sx={{
-
-                  // borderTop: "1px solid grey",
-                  // borderRight: "1px solid grey",
-                  // borderBottom: "1px solid grey",
-                  // borderLeft: "1px solid grey",
-                  // // height: 250
-                  // paddingTop: 0,
-                  // paddingLeft: 8,
                   paddingBottom: 9,
-                  // width: 500
                 }}>
                 <TextField
                   id="currentTable"
@@ -400,14 +323,6 @@ export default function SignIn() {
             </Grid>
           </Grid>
           <Grid container rowSpacing={2}
-            sx={{
-              // borderTop: "1px solid grey",
-              // borderRight: "1px solid grey",
-              // borderBottom: "1px solid grey",
-              // borderLeft: "1px solid grey",
-              // height: 250
-            }}
-
             direction="row"
             alignItems="center"
             justifyContent="center"
