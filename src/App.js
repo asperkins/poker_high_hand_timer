@@ -16,7 +16,13 @@ const audio = new Audio(ringer);
 audio.loop = false;
 
 const queryParams = queryString.parse(window.location.search)
-console.log(queryParams);
+
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+  }
+});
+
 try {
   if (queryParams.clear === "true") {
     console.log("Clearing local storage");
@@ -43,12 +49,13 @@ try {
     localStorage.setItem('sessionState', JSON.stringify(sessionState));
   }
 } catch (error) {
+  console.log(error);
   localStorage.clear();
 }
 console.log("Loading Saved Session");
 const sessionState = JSON.parse(localStorage.getItem('sessionState'));
 
-function saveSessionState(sessionState) {
+const saveSessionState = (sessionState) => {
   console.log("Saving Session");
   localStorage.setItem('sessionState', JSON.stringify(sessionState));
   console.log("Session" + localStorage.getItem("sessionState"));
@@ -64,12 +71,6 @@ const TimerButton = styled(Button)({
   width: '100%',
   height: 450,
   fontSize: 440
-});
-
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-  }
 });
 
 export default function App() {
@@ -115,7 +116,7 @@ export default function App() {
     Ref.current = id;
   }
 
-  function moveCurrentHand() {
+  const moveCurrentHand = () => {
     setPreviousHand(currentHand);
     setPreviousTable(currentTable);
     setPreviousSeat(currentSeat);
@@ -139,10 +140,9 @@ export default function App() {
   useEffect(() => {
     updateTimer();
   }, [activeEndTime, activeStartTime]);
+  
   useEffect(() => {
-    console.log(timer);
     if (timer === "00:00") {
-      console.log("alarm");
       audio.play();
       if (waitForHandToComplete === "yes") {
         setHandCompleteButtonDisabled(false);
@@ -163,8 +163,6 @@ export default function App() {
     sessionState.waitForHandToComplete = waitForHandToComplete;
     sessionState.activeEndTime = activeEndTime;
     sessionState.activeStartTime = activeStartTime;
-
-    console.log(currentHand);
     saveSessionState(sessionState);
   }, [currentHand, currentSeat, currentTable, previousHand, previousSeat, previousTable, intervalTime, waitForHandToComplete, activeStartTime, activeEndTime]);
 
