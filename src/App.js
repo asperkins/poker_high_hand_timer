@@ -48,7 +48,8 @@ try {
       previousSeat: "",
       activeStartTime: "12:00",
       activeEndTime: "22:00",
-      messageNotes: "HORSESHOE TUNICA HIGH HAND PROMOTION - FULL HOUSE OR BETTER PAYS $100 ON REGULAR TABLES AND $200 ON THE FEATURED TABLE. OMAHA HANDS MUST FLOP THE HAND TO QUALIFY"
+      messageNotes: "HORSESHOE TUNICA HIGH HAND PROMOTION - FULL HOUSE OR BETTER PAYS $100 ON REGULAR TABLES AND $200 ON THE FEATURED TABLE. OMAHA HANDS MUST FLOP THE HAND TO QUALIFY",
+      marqueeSpeed: 100
     }
     localStorage.setItem('sessionState', JSON.stringify(sessionState));
   }
@@ -56,13 +57,11 @@ try {
   console.log(error);
   localStorage.clear();
 }
-console.log("Loading Saved Session");
+
 const sessionState = JSON.parse(localStorage.getItem('sessionState'));
 
 const saveSessionState = (sessionState) => {
-  console.log("Saving Session");
   localStorage.setItem('sessionState', JSON.stringify(sessionState));
-  console.log("Session" + localStorage.getItem("sessionState"));
 }
 
 const TimerButton = styled(Button)({
@@ -142,6 +141,7 @@ const App = () => {
   const [activeStartTime, setActiveStartTime] = useState(sessionState.activeStartTime);
   const [activeEndTime, setActiveEndTime] = useState(sessionState.activeEndTime);
   const [messageNotes, setMessageNotes] = useState(sessionState.messageNotes);
+  const [marqueeSpeed, setMarqueeSpeed] = useState(sessionState.marqueeSpeed);
 
   useEffect(() => {
     updateTimer();
@@ -170,9 +170,11 @@ const App = () => {
     sessionState.activeEndTime = activeEndTime;
     sessionState.activeStartTime = activeStartTime;
     sessionState.messageNotes = messageNotes;
+    sessionState.marqueeSpeed = marqueeSpeed;
     setHandCompleteButtonDisabled(waitForHandToComplete === "no");
     saveSessionState(sessionState);
-  }, [currentHand, currentSeat, currentTable, previousHand, previousSeat, previousTable, intervalTime, waitForHandToComplete, activeStartTime, activeEndTime, messageNotes]);
+    console.log(sessionState)
+  }, [currentHand, currentSeat, currentTable, previousHand, previousSeat, previousTable, intervalTime, waitForHandToComplete, activeStartTime, activeEndTime, messageNotes, marqueeSpeed]);
 
   function Copyright() {
     return (
@@ -416,9 +418,9 @@ const App = () => {
             }}>
             <MessageMarquee
               value={messageNotes}
-              onChange={(message) =>{
-                setMessageNotes(message)}
-              }
+              speed={marqueeSpeed}
+              onMessageNotesChange={(message)=>{setMessageNotes(message)}}
+              onMarqueeSpeedChange={(speed)=>{setMarqueeSpeed(speed)}}
                />
           </Grid>
         </Grid>
