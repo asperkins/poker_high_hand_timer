@@ -173,7 +173,6 @@ const App = () => {
     sessionState.marqueeSpeed = marqueeSpeed;
     setHandCompleteButtonDisabled(waitForHandToComplete === "no");
     saveSessionState(sessionState);
-    console.log(sessionState)
   }, [currentHand, currentSeat, currentTable, previousHand, previousSeat, previousTable, intervalTime, waitForHandToComplete, activeStartTime, activeEndTime, messageNotes, marqueeSpeed]);
 
   function Copyright() {

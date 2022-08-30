@@ -141,7 +141,7 @@ const MessageMarquee = (props) => {
                                 </Tooltip>
                             </Grid>
                             <Grid item md={5.5} sx={{ paddingTop:1}}>
-                                <Slider defaultValue={marqueeSpeed} step={10} marks min={10} max={600}
+                                <Slider defaultValue={marqueeSpeed} step={10} marks min={10} max={400}
                                     onChange={(e) => {
                                         setMarqueeSpeed(e.target.value);
                                     }}
