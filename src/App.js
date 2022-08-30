@@ -11,13 +11,14 @@ import { MenuItem } from '@mui/material';
 import { styled } from '@mui/material/styles'
 import ringer from "./alarm.mp3";
 import queryString from "query-string"
-import Marquee from "react-fast-marquee";
+import MessageMarquee from "./MessageMarque";
+import { ConfirmProvider } from 'material-ui-confirm';
 
 
 const audio = new Audio(ringer);
 audio.loop = false;
 
-const queryParams = queryString.parse(window.location.search) 
+const queryParams = queryString.parse(window.location.search)
 
 const theme = createTheme({
   palette: {
@@ -128,7 +129,6 @@ const App = () => {
     setCurrentHand("");
     setCurrentSeat("");
     setCurrentTable("");
-    //setHandCompleteButtonDisabled(true);
   }
   const [currentHand, setCurrentHand] = useState(sessionState.currentHand);
   const [currentTable, setCurrentTable] = useState(sessionState.currentTable);
@@ -169,9 +169,10 @@ const App = () => {
     sessionState.waitForHandToComplete = waitForHandToComplete;
     sessionState.activeEndTime = activeEndTime;
     sessionState.activeStartTime = activeStartTime;
+    sessionState.messageNotes = messageNotes;
     setHandCompleteButtonDisabled(waitForHandToComplete === "no");
     saveSessionState(sessionState);
-  }, [currentHand, currentSeat, currentTable, previousHand, previousSeat, previousTable, intervalTime, waitForHandToComplete, activeStartTime, activeEndTime]);
+  }, [currentHand, currentSeat, currentTable, previousHand, previousSeat, previousTable, intervalTime, waitForHandToComplete, activeStartTime, activeEndTime, messageNotes]);
 
   function Copyright() {
     return (
@@ -183,6 +184,7 @@ const App = () => {
   }
 
   return (
+    <ConfirmProvider>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container component="main" maxWidth="xxl" fullWidth>
@@ -190,7 +192,7 @@ const App = () => {
           direction="row"
           alignItems="center"
           justifyContent="center"
-          sx={{ paddingTop: 4}}>
+          sx={{ paddingTop: 4 }}>
           <Grid item md={8}
             sx={{
               paddingLeft: 5,
@@ -303,7 +305,7 @@ const App = () => {
                   id="currentHand"
                   label="CURRENT HIGH HAND"
                   inputProps={{ maxlength: 11 }}
-                  sx={{ background: 'black', width: '100%', input: { fontSize: 140, color: 'green', textTransform: "uppercase"}, label: { fontSize: 40 } }}
+                  sx={{ background: 'black', width: '100%', input: { fontSize: 140, color: 'green', textTransform: "uppercase" }, label: { fontSize: 40 } }}
                   variant='filled'
                   value={currentHand}
                   onChange={(e) => setCurrentHand(e.target.value)} />
@@ -338,7 +340,7 @@ const App = () => {
                   onInput={(e) => {
                     e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 2)
                   }}
-                  sx={{ background: 'black', width: '100%', input: { fontSize: 140, color: 'green', textAlign: 'center'}, label: { fontSize: 40 } }}
+                  sx={{ background: 'black', width: '100%', input: { fontSize: 140, color: 'green', textAlign: 'center' }, label: { fontSize: 40 } }}
                   variant='filled'
                   value={currentSeat}
                   onChange={(e) => setCurrentSeat(e.target.value)} />
@@ -383,7 +385,7 @@ const App = () => {
                   e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 2)
                 }}
                 value={previousTable}
-                sx={{ background: 'black', width: '100%', input: { fontSize: 140, color: '#666666', textAlign: 'center'}, label: { color: '#666666', fontSize: 40 } }}
+                sx={{ background: 'black', width: '100%', input: { fontSize: 140, color: '#666666', textAlign: 'center' }, label: { color: '#666666', fontSize: 40 } }}
                 onChange={(e) => setPreviousTable(e.target.value)} />
             </Grid>
             <Grid item md={2}
@@ -401,27 +403,29 @@ const App = () => {
                   e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 2)
                 }}
                 value={previousSeat}
-                sx={{ background: 'black', width: '100%', input: { fontSize: 140, color: '#666666',textAlign: 'center' }, label: { color: '#666666', fontSize: 40 } }}
+                sx={{ background: 'black', width: '100%', input: { fontSize: 140, color: '#666666', textAlign: 'center' }, label: { color: '#666666', fontSize: 40 } }}
                 onChange={(e) => setPreviousSeat(e.target.value)} />
             </Grid>
           </Grid>
           <Grid md={12}
             sx={{
-              paddingTop:0,
+              paddingTop: 0,
               paddingLeft: 8,
               paddingRight: 5,
               paddingBottom: 0
             }}>
-            <Marquee
-              speed={120}
-              gradient={false}>
-              <h1>* {sessionState.messageNotes} *</h1>
-            </Marquee>
+            <MessageMarquee
+              value={messageNotes}
+              onChange={(message) =>{
+                setMessageNotes(message)}
+              }
+               />
           </Grid>
         </Grid>
         <Copyright />
       </Container>
     </ThemeProvider >
+    </ConfirmProvider>
   );
 }
 export default App;
