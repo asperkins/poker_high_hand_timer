@@ -141,7 +141,7 @@ const App = () => {
   const [handCompleteButtonDisabled, setHandCompleteButtonDisabled] = useState(false);
   const [activeStartTime, setActiveStartTime] = useState(sessionState.activeStartTime);
   const [activeEndTime, setActiveEndTime] = useState(sessionState.activeEndTime);
-  //const [messageNotes, setMessageNotes] = useState(sessionState.messageNotes);
+  const [messageNotes, setMessageNotes] = useState(sessionState.messageNotes);
 
   useEffect(() => {
     updateTimer();
@@ -415,7 +415,7 @@ const App = () => {
             <Marquee
               speed={120}
               gradient={false}>
-              <h1>* {messageNotes} *</h1>
+              <h1>* {sessionState.messageNotes} *</h1>
             </Marquee>
           </Grid>
         </Grid>
