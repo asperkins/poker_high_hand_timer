@@ -17,7 +17,7 @@ import Marquee from "react-fast-marquee";
 const audio = new Audio(ringer);
 audio.loop = false;
 
-const queryParams = queryString.parse(window.location.search)
+const queryParams = queryString.parse(window.location.search) 
 
 const theme = createTheme({
   palette: {
@@ -141,7 +141,7 @@ const App = () => {
   const [handCompleteButtonDisabled, setHandCompleteButtonDisabled] = useState(false);
   const [activeStartTime, setActiveStartTime] = useState(sessionState.activeStartTime);
   const [activeEndTime, setActiveEndTime] = useState(sessionState.activeEndTime);
-  const [messageNotes, setMessageNotes] = useState(sessionState.messageNotes);
+  //const [messageNotes, setMessageNotes] = useState(sessionState.messageNotes);
 
   useEffect(() => {
     updateTimer();
