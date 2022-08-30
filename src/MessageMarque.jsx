@@ -76,7 +76,7 @@ const MessageMarquee = (props) => {
                     <div id="messageInput" hidden>
                         <TextField
                             sx={{
-                                paddingTop: 0,
+                                paddingTop: 2,
                                 paddingBottom: 0,
                                 width: "95%"
                             }}
