@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './components/index.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import App from './App';
+
+export { default as Copyright } from './components/Copyright'
+export { default as HandTextField } from './components/HandTextField'
+export { default as MessageMarquee } from "./components/MessageMarque"
+export { default as PromotionTimeStartField } from './components/PromotionTimeTextField'
+export { default as TableSeatTextField } from './components/TableSeatTextField'
+export { default as TimerButton } from './components/TimerButton'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

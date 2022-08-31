@@ -155,4 +155,4 @@ const MessageMarquee = (props) => {
     );
 }
 
-export default MessageMarquee;
+export default MessageMarquee

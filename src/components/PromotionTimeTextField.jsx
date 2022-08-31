@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { TextField } from "@mui/material"
 
-export const PromotionTimeStartField = (props) => {
+const PromotionTimeStartField = (props) => {
     const [activeTime, setActiveTime] = useState(props.value);
 
 
@@ -24,3 +24,5 @@ export const PromotionTimeStartField = (props) => {
         />
     )
 }
+
+export default PromotionTimeStartField
