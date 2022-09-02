@@ -10,7 +10,8 @@ import { MenuItem } from '@mui/material';
 import ringer from "./components/alarm.mp3";
 import queryString from "query-string"
 import { ConfirmProvider } from 'material-ui-confirm';
-import { Copyright, HandTextField, MessageMarquee, PromotionTimeStartField, TableSeatTextField, TimerButton } from "./index.js";
+import { Copyright, HandTextField, MessageMarquee, PromotionTimeTextField, TableSeatTextField } from "./index.js";
+import TimerTypography from './components/TimerTypography';
 
 const audio = new Audio(ringer);
 audio.loop = false;
@@ -20,8 +21,33 @@ const queryParams = queryString.parse(window.location.search)
 const theme = createTheme({
   palette: {
     mode: 'dark',
-  }
-});
+  },
+},
+);
+
+theme.typography.timer = {
+  color: 'gold',
+  fontSize: '6rem',
+  '@media (min-width:600px)': {
+    fontSize: '8rem',
+  },
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '10rem',
+    lineHeight: .8,
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '12rem',
+    lineHeight: .8,
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '18rem',
+    lineHeight: .8,
+  },
+  [theme.breakpoints.up('xl')]: {
+    fontSize: '28rem',
+    lineHeight: .8,
+  },
+};
 
 try {
   if (queryParams.clear === "true") {
@@ -167,49 +193,54 @@ const App = () => {
         <CssBaseline />
         <Container component="main" maxWidth="xxl" fullWidth>
           <Grid container rowGap={0}
-            direction="row"
-            alignItems="center"
-            justifyContent="center"
-            sx={{ paddingTop: 4 }}>
-            <Grid item md={8}
+            // direction="row"
+            // alignItems="center"
+            // justifyContent="center"
+            sx={{ paddingTop: 4, }}>
+            <Grid item xl={8} md={12}
               sx={{
-                paddingLeft: 5,
+                paddingLeft: 0,
+                alignContent: "center",
               }}>
-              <TimerButton variant="contained" onClick={() => { }}>{timer}</TimerButton>
+              <center><TimerTypography timerValue={timer}>{timer}</TimerTypography></center>
+              {/* <TimerButton variant="contained" onClick={() => { }}>{timer}</TimerButton> */}
             </Grid>
-            <Grid item md={4}>
+            <Grid item xl={4} lg={12}>
               <Grid container
                 sx={{
                   paddingTop: 0,
-                  paddingLeft: 5,
+                  paddingLeft: 0,
                   paddingBottom: 0,
                   paddingRight: 5
                 }}>
-                <Grid item md={6} sx={{
-                  paddingTop: 0,
-                  paddingRight: 1
+                <Grid xl={6} lg={2} sx={{
+                  paddingTop: 2,
+                  paddingRight: 1,
+                  paddingLeft: 2,
                 }}>
-                  <PromotionTimeStartField
+                  <PromotionTimeTextField
                     label="Promotion Start"
                     value={activeStartTime}
                     onTimeChange={(time) => {
                       setActiveStartTime(time);
                     }} />
                 </Grid>
-                <Grid item md={6} sx={{
-                  paddingTop: 0,
+                <Grid item xl={6} lg={2} sx={{
+                  paddingTop: 2,
+                  paddingLeft: 2,
                 }}>
-                  <PromotionTimeStartField
+                  <PromotionTimeTextField
                     label="Promotion End"
                     value={activeEndTime}
                     onTimeChange={(time) => {
                       setActiveEndTime(time);
                     }} />
                 </Grid>
-                <Grid item md={12}
+                <Grid item xl={12} lg={2}
                   sx={{
                     paddingTop: 2,
-                    paddingBottom: 2,
+                    paddingBottom: 0,
+                    paddingLeft: 2,
                   }}>
                   <TextField
                     id="select"
@@ -218,8 +249,8 @@ const App = () => {
                     select
                     sx={{ width: '100%' }}
                     onChange={(e) => setIntervalTime(e.target.value)}
-                    InputProps={{ style: { fontSize: 40 } }}
-                    InputLabelProps={{ style: { fontSize: 30 } }}>
+                    InputProps={{ style: { fontSize: '150%' } }}
+                    InputLabelProps={{ style: { fontSize: '150%' } }}>
                     <MenuItem value="10">10 minutes</MenuItem>
                     <MenuItem value="15">15 minutes</MenuItem>
                     <MenuItem value="20">20 minutes</MenuItem>
@@ -227,7 +258,12 @@ const App = () => {
                     <MenuItem value="60">60 minutes</MenuItem>
                   </TextField>
                 </Grid>
-                <Grid item md={8}>
+                <Grid item xl={8} lg={4}
+                  sx={{
+                    paddingTop: 2,
+                    paddingBottom: 0,
+                    paddingLeft: 2,
+                  }}>
                   <TextField
                     id="select"
                     label="Wait for last hand to complete"
@@ -235,21 +271,21 @@ const App = () => {
                     select
                     sx={{ width: '100%' }}
                     onChange={(e) => setWaitForHandToComplete(e.target.value)}
-                    InputProps={{ style: { fontSize: 40 } }}
-                    InputLabelProps={{ style: { fontSize: 30 } }}>
+                    InputProps={{ style: { fontSize: '150%' } }}
+                    InputLabelProps={{ style: { fontSize: '150%' } }}>
                     <MenuItem value="no">No</MenuItem>
                     <MenuItem value="yes">Yes</MenuItem>
                   </TextField>
                 </Grid>
-                <Grid item md={4}
+                <Grid item xl={4} lg={2}
                   sx={{
-                    paddingTop: 0,
+                    paddingTop: 2,
                     paddingLeft: 2
                   }}>
                   <Button
                     id="HandComplete"
                     variant="contained"
-                    sx={{ height: '100%', fontSize: 17 }}
+                    sx={{ height: '90%', fontSize: '90%' }}
                     disabled={handCompleteButtonDisabled}
                     onClick={moveCurrentHand}
                   >Final Hands Completed</Button>
@@ -265,10 +301,10 @@ const App = () => {
                   paddingBottom: 0,
                   paddingRight: 5
                 }}>
-                <Grid item md={8}
+                <Grid item xl={8} md={8}
                   sx={{
                     paddingBottom: 0,
-                    paddingLeft: 8
+                    paddingLeft: 2,
                   }}>
                   <HandTextField
                     id="currentHand"
@@ -279,10 +315,10 @@ const App = () => {
                     onChange={(e) => setCurrentHand(e.target.value)}
                   />
                 </Grid>
-                <Grid item md={2}
+                <Grid item xl={2} md={2}
                   sx={{
                     paddingBottom: 1,
-                    paddingLeft: 8
+                    paddingLeft: 2
                   }}>
                   <TableSeatTextField
                     id="currentTable"
@@ -292,10 +328,10 @@ const App = () => {
                     onValueChange={(value) => setCurrentTable(value)}
                   />
                 </Grid>
-                <Grid item md={2}
+                <Grid item xl={2} md={2}
                   sx={{
                     paddingBottom: 1,
-                    paddingLeft: 8
+                    paddingLeft: 2
                   }}>
                   <TableSeatTextField
                     id="currentSeat"
@@ -316,10 +352,10 @@ const App = () => {
                 paddingRight: 5
               }}>
 
-              <Grid item md={8}
+              <Grid item xl={8} md={8}
                 sx={{
                   paddingBottom: 0,
-                  paddingLeft: 8
+                  paddingLeft: 2
                 }}>
                 <HandTextField
                   id="previousHand"
@@ -330,10 +366,10 @@ const App = () => {
                   onHandChange={(hand) => setPreviousHand(hand)}
                 />
               </Grid>
-              <Grid item md={2}
+              <Grid item xl={2} md={2}
                 sx={{
                   paddingBottom: 0,
-                  paddingLeft: 8
+                  paddingLeft: 2
                 }}>
                 <TableSeatTextField
                   id="previousTable"
@@ -342,10 +378,10 @@ const App = () => {
                   onValueChange={(value) => setPreviousTable(value)}
                 />
               </Grid>
-              <Grid item md={2}
+              <Grid item xl={2} md={2}
                 sx={{
                   paddingBottom: 0,
-                  paddingLeft: 8
+                  paddingLeft: 2
                 }}>
                 <TableSeatTextField
                   id="previousSeat"
@@ -356,7 +392,7 @@ const App = () => {
                 />
               </Grid>
             </Grid>
-            <Grid md={12}
+            <Grid xl={12}
               sx={{
                 paddingTop: 0,
                 paddingLeft: 8,

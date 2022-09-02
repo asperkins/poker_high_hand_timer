@@ -7,7 +7,7 @@ import App from './App';
 export { default as Copyright } from './components/Copyright'
 export { default as HandTextField } from './components/HandTextField'
 export { default as MessageMarquee } from "./components/MessageMarque"
-export { default as PromotionTimeStartField } from './components/PromotionTimeTextField'
+export { default as PromotionTimeTextField } from './components/PromotionTimeTextField'
 export { default as TableSeatTextField } from './components/TableSeatTextField'
 export { default as TimerButton } from './components/TimerButton'
 

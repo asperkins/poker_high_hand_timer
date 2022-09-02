@@ -17,13 +17,13 @@ const HandTextField = (props) => {
                 background: 'black',
                 width: '100%',
                 input: {
-                    fontSize: 140,
+                    fontSize: '320%',
                     color: props.color,
                     textTransform: "uppercase"
                 },
                 label: {
                     color: props.labelColor,
-                    fontSize: 40
+                    fontSize: '150%'
                 }
             }}
             inputProps={{ maxlength: 11 }}

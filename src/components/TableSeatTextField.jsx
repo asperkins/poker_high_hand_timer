@@ -16,21 +16,21 @@ const TableSeatTextField = (props) => {
                 background: 'black',
                 width: '100%',
                 input: {
-                    fontSize: 140,
+                    fontSize: '320%',
                     color: props.color,
                     textTransform: "uppercase"
                 },
                 label: {
                     color: props.labelColor,
-                    fontSize: 40
+                    fontSize: '150%'
                 }
             }}
             type="number"
             onInput={(e) => {
                 e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 2)
               }}
-            InputProps={{ style: { fontSize: 40 } }}
-            InputLabelProps={{ style: { fontSize: 30 } }}
+            InputProps={{ style: { fontSize: '250%' } }}
+            InputLabelProps={{ style: { fontSize: '120%' } }}
             onChange={(e) => {
                 setValue(e.target.value)
             }}
