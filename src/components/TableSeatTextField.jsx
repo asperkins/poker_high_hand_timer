@@ -18,7 +18,8 @@ const TableSeatTextField = (props) => {
                 input: {
                     fontSize: '320%',
                     color: props.color,
-                    textTransform: "uppercase"
+                    textTransform: "uppercase",
+                    textAlign: 'center'
                 },
                 label: {
                     color: props.labelColor,
@@ -30,7 +31,7 @@ const TableSeatTextField = (props) => {
                 e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 2)
               }}
             InputProps={{ style: { fontSize: '250%' } }}
-            InputLabelProps={{ style: { fontSize: '120%' } }}
+            InputLabelProps={{ style: { fontSize: '250%' } }}
             onChange={(e) => {
                 setValue(e.target.value)
             }}

@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { MenuItem } from '@mui/material';
+import { MenuItem, Tooltip } from '@mui/material';
 import ringer from "./components/alarm.mp3";
 import queryString from "query-string"
 import { ConfirmProvider } from 'material-ui-confirm';
@@ -192,225 +192,246 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container component="main" maxWidth="xxl" fullWidth>
-          <Grid container rowGap={0}
-            // direction="row"
-            // alignItems="center"
-            // justifyContent="center"
-            sx={{ paddingTop: 4, }}>
-            <Grid item xl={8} md={12}
-              sx={{
-                paddingLeft: 0,
-                alignContent: "center",
-              }}>
-              <center><TimerTypography timerValue={timer}>{timer}</TimerTypography></center>
-              {/* <TimerButton variant="contained" onClick={() => { }}>{timer}</TimerButton> */}
-            </Grid>
-            <Grid item xl={4} lg={12}>
-              <Grid container
-                sx={{
-                  paddingTop: 0,
-                  paddingLeft: 0,
-                  paddingBottom: 0,
-                  paddingRight: 5
-                }}>
-                <Grid xl={6} lg={2} sx={{
-                  paddingTop: 2,
-                  paddingRight: 1,
-                  paddingLeft: 2,
-                }}>
-                  <PromotionTimeTextField
-                    label="Promotion Start"
-                    value={activeStartTime}
-                    onTimeChange={(time) => {
-                      setActiveStartTime(time);
-                    }} />
-                </Grid>
-                <Grid item xl={6} lg={2} sx={{
-                  paddingTop: 2,
-                  paddingLeft: 2,
-                }}>
-                  <PromotionTimeTextField
-                    label="Promotion End"
-                    value={activeEndTime}
-                    onTimeChange={(time) => {
-                      setActiveEndTime(time);
-                    }} />
-                </Grid>
-                <Grid item xl={12} lg={2}
-                  sx={{
-                    paddingTop: 2,
-                    paddingBottom: 0,
-                    paddingLeft: 2,
-                  }}>
-                  <TextField
-                    id="select"
-                    label="Interval"
-                    value={intervalTime}
-                    select
-                    sx={{ width: '100%' }}
-                    onChange={(e) => setIntervalTime(e.target.value)}
-                    InputProps={{ style: { fontSize: '150%' } }}
-                    InputLabelProps={{ style: { fontSize: '150%' } }}>
-                    <MenuItem value="10">10 minutes</MenuItem>
-                    <MenuItem value="15">15 minutes</MenuItem>
-                    <MenuItem value="20">20 minutes</MenuItem>
-                    <MenuItem value="30">30 minutes</MenuItem>
-                    <MenuItem value="60">60 minutes</MenuItem>
-                  </TextField>
-                </Grid>
-                <Grid item xl={8} lg={4}
-                  sx={{
-                    paddingTop: 2,
-                    paddingBottom: 0,
-                    paddingLeft: 2,
-                  }}>
-                  <TextField
-                    id="select"
-                    label="Wait for last hand to complete"
-                    value={waitForHandToComplete}
-                    select
-                    sx={{ width: '100%' }}
-                    onChange={(e) => setWaitForHandToComplete(e.target.value)}
-                    InputProps={{ style: { fontSize: '150%' } }}
-                    InputLabelProps={{ style: { fontSize: '150%' } }}>
-                    <MenuItem value="no">No</MenuItem>
-                    <MenuItem value="yes">Yes</MenuItem>
-                  </TextField>
-                </Grid>
-                <Grid item xl={4} lg={2}
-                  sx={{
-                    paddingTop: 2,
-                    paddingLeft: 2
-                  }}>
-                  <Button
-                    id="HandComplete"
-                    variant="contained"
-                    sx={{ height: '90%', fontSize: '90%' }}
-                    disabled={handCompleteButtonDisabled}
-                    onClick={moveCurrentHand}
-                  >Final Hands Completed</Button>
-                </Grid>
-              </Grid>
-            </Grid>
+          <Grid
+            container
+            spacing={0}
+            alignItems="center"
+            justifyContent="center"
+            direction="row"
+            style={{ height: 1 }}>
             <Grid item>
-              <Grid container rowSpacing={2}
-                direction="row"
+              <Grid container rowGap={0}
+                // direction="row"
                 // alignItems="center"
-                justifyContent="center"
-                sx={{
-                  paddingBottom: 0,
-                  paddingRight: 5
-                }}>
-                <Grid item xl={8} md={8}
+                // justifyContent="center"
+                sx={{ paddingTop: 4, }}>
+                <Grid item xl={8} md={12}
+                  sx={{
+                    paddingLeft: 0,
+                    alignContent: "center",
+                  }}>
+                  <center><TimerTypography timerValue={timer}>{timer}</TimerTypography></center>
+                  {/* <TimerButton variant="contained" onClick={() => { }}>{timer}</TimerButton> */}
+                </Grid>
+                <Grid item xl={4} lg={12}>
+                  <Grid container
+                    sx={{
+                      paddingTop: 0,
+                      paddingLeft: 0,
+                      paddingBottom: 0,
+                      paddingRight: 5
+                    }}>
+                    <Grid xl={6} lg={2} sx={{
+                      paddingTop: 2,
+                      paddingRight: 1,
+                      paddingLeft: 2,
+                    }}>
+                      <PromotionTimeTextField
+                        label="Promotion Start"
+                        value={activeStartTime}
+                        onTimeChange={(time) => {
+                          setActiveStartTime(time);
+                        }} />
+                    </Grid>
+                    <Grid item xl={6} lg={2} sx={{
+                      paddingTop: 2,
+                      paddingLeft: 2,
+                    }}>
+                      <PromotionTimeTextField
+                        label="Promotion End"
+                        value={activeEndTime}
+                        onTimeChange={(time) => {
+                          setActiveEndTime(time);
+                        }} />
+                    </Grid>
+                    <Grid item xl={12} lg={2}
+                      sx={{
+                        paddingTop: 2,
+                        paddingBottom: 0,
+                        paddingLeft: 2,
+                      }}>
+                      <TextField
+                        id="select"
+                        label="Interval"
+                        value={intervalTime}
+                        select
+                        sx={{ width: '100%' }}
+                        onChange={(e) => setIntervalTime(e.target.value)}
+                        InputProps={{ style: { fontSize: '200%' } }}
+                        InputLabelProps={{ style: { fontSize: '200%' } }}>
+                        <MenuItem value="10">10 minutes</MenuItem>
+                        <MenuItem value="15">15 minutes</MenuItem>
+                        <MenuItem value="20">20 minutes</MenuItem>
+                        <MenuItem value="30">30 minutes</MenuItem>
+                        <MenuItem value="60">60 minutes</MenuItem>
+                      </TextField>
+                    </Grid>
+                    <Grid item xl={8} lg={4}
+                      sx={{
+                        paddingTop: 2,
+                        paddingBottom: 0,
+                        paddingLeft: 2,
+                      }}>
+                      <Tooltip title="Wait for last hand to complete before starting next period?">
+                        <TextField
+                          id="select"
+                          label="Wait for last hand to complete"
+                          value={waitForHandToComplete}
+                          select
+                          sx={{ width: '100%' }}
+                          onChange={(e) => setWaitForHandToComplete(e.target.value)}
+                          InputProps={{ style: { fontSize: '200%' } }}
+                          InputLabelProps={{ style: { fontSize: '200%' } }}>
+                          <MenuItem value="no">No</MenuItem>
+                          <MenuItem value="yes">Yes</MenuItem>
+                        </TextField>
+                      </Tooltip>
+                    </Grid>
+                    <Grid item xl={4} lg={2}
+                      sx={{
+                        paddingTop: 3,
+                        paddingLeft: 2
+                      }}>
+                      <Tooltip title="Move Current Hand values to Previous Hand">
+                        <Button
+                          id="HandComplete"
+                          variant="contained"
+                          sx={{ height: '90%', fontSize: '90%', fontWeight: "bold" }}
+                          disabled={handCompleteButtonDisabled}
+                          onClick={moveCurrentHand}
+                        >Final Hands Completed</Button>
+                      </Tooltip>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item>
+                  <Grid container rowSpacing={2}
+                    direction="row"
+                    // alignItems="center"
+                    justifyContent="center"
+                    sx={{
+                      paddingBottom: 0,
+                      paddingRight: 5
+                    }}>
+                    <Grid item xl={8} md={8}
+                      sx={{
+                        paddingBottom: 0,
+                        paddingLeft: 4,
+                      }}>
+                      <HandTextField
+                        id="currentHand"
+                        label="CURRENT HIGH HAND"
+                        value={currentHand}
+                        color="green"
+                        onHandChange={(hand) => setCurrentHand(hand)}
+                        onChange={(e) => setCurrentHand(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item xl={2} md={2}
+                      sx={{
+                        paddingBottom: 1,
+                        paddingLeft: 5
+                      }}>
+                      <TableSeatTextField
+                        id="currentTable"
+                        label="TABLE"
+                        value={currentTable}
+                        color="green"
+                        onValueChange={(value) => setCurrentTable(value)}
+                      />
+                    </Grid>
+                    <Grid item xl={2} md={2}
+                      sx={{
+                        paddingBottom: 1,
+                        paddingLeft: 5
+                      }}>
+                      <TableSeatTextField
+                        id="currentSeat"
+                        label="SEAT"
+                        value={currentSeat}
+                        color="green"
+                        onValueChange={(value) => setCurrentSeat(value)}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid container rowSpacing={2}
+                  direction="row"
+                  // alignItems="center"
+                  justifyContent="center"
                   sx={{
                     paddingBottom: 0,
-                    paddingLeft: 2,
+                    paddingRight: 5
                   }}>
-                  <HandTextField
-                    id="currentHand"
-                    label="CURRENT HIGH HAND"
-                    value={currentHand}
-                    color="green"
-                    onHandChange={(hand) => setCurrentHand(hand)}
-                    onChange={(e) => setCurrentHand(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xl={2} md={2}
-                  sx={{
-                    paddingBottom: 1,
-                    paddingLeft: 2
-                  }}>
-                  <TableSeatTextField
-                    id="currentTable"
-                    label="TABLE"
-                    value={currentTable}
-                    color="green"
-                    onValueChange={(value) => setCurrentTable(value)}
-                  />
-                </Grid>
-                <Grid item xl={2} md={2}
-                  sx={{
-                    paddingBottom: 1,
-                    paddingLeft: 2
-                  }}>
-                  <TableSeatTextField
-                    id="currentSeat"
-                    label="SEAT"
-                    value={currentSeat}
-                    color="green"
-                    onValueChange={(value) => setCurrentSeat(value)}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid container rowSpacing={2}
-              direction="row"
-              // alignItems="center"
-              justifyContent="center"
-              sx={{
-                paddingBottom: 0,
-                paddingRight: 5
-              }}>
 
-              <Grid item xl={8} md={8}
-                sx={{
-                  paddingBottom: 0,
-                  paddingLeft: 2
-                }}>
-                <HandTextField
-                  id="previousHand"
-                  label="PREVIOUS HIGH HAND"
-                  value={previousHand}
-                  color="#666666"
-                  labelColor="#666666"
-                  onHandChange={(hand) => setPreviousHand(hand)}
-                />
-              </Grid>
-              <Grid item xl={2} md={2}
-                sx={{
-                  paddingBottom: 0,
-                  paddingLeft: 2
-                }}>
-                <TableSeatTextField
-                  id="previousTable"
-                  label="TABLE"
-                  value={previousTable}
-                  onValueChange={(value) => setPreviousTable(value)}
-                />
-              </Grid>
-              <Grid item xl={2} md={2}
-                sx={{
-                  paddingBottom: 0,
-                  paddingLeft: 2
-                }}>
-                <TableSeatTextField
-                  id="previousSeat"
-                  label="SEAT"
-                  value={previousSeat}
-                  color=""
-                  onValueChange={(value) => setPreviousSeat(value)}
-                />
+                  <Grid item xl={8} md={8}
+                    sx={{
+                      paddingBottom: 0,
+                      paddingLeft: 4
+                    }}>
+                    <HandTextField
+                      id="previousHand"
+                      label="PREVIOUS HIGH HAND"
+                      value={previousHand}
+                      color="#666666"
+                      labelColor="#666666"
+                      onHandChange={(hand) => setPreviousHand(hand)}
+                    />
+                  </Grid>
+                  <Grid item xl={2} md={2}
+                    sx={{
+                      paddingBottom: 0,
+                      paddingLeft: 5
+                    }}>
+                    <TableSeatTextField
+                      id="previousTable"
+                      label="TABLE"
+                      value={previousTable}
+                      color="#666666"
+                      labelColor="#666666"
+                      onValueChange={(value) => setPreviousTable(value)}
+                    />
+                  </Grid>
+                  <Grid item xl={2} md={2}
+                    sx={{
+                      paddingBottom: 0,
+                      paddingLeft: 5
+                    }}>
+                    <TableSeatTextField
+                      id="previousSeat"
+                      label="SEAT"
+                      value={previousSeat}
+                      color="#666666"
+                      labelColor="#666666" 
+                      onValueChange={(value) => setPreviousSeat(value)}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid xl={12}
+                  sx={{
+                    paddingTop: 0,
+                    paddingLeft: 3,
+                    paddingRight: 5,
+                    paddingBottom: 0
+                  }}>
+                  <MessageMarquee
+                    value={messageNotes}
+                    speed={marqueeSpeed}
+                    onMessageNotesChange={(message) => { setMessageNotes(message) }}
+                    onMarqueeSpeedChange={(speed) => { setMarqueeSpeed(speed) }}
+                  />
+                </Grid>
               </Grid>
             </Grid>
-            <Grid xl={12}
-              sx={{
-                paddingTop: 0,
-                paddingLeft: 8,
-                paddingRight: 5,
-                paddingBottom: 0
-              }}>
-              <MessageMarquee
-                value={messageNotes}
-                speed={marqueeSpeed}
-                onMessageNotesChange={(message) => { setMessageNotes(message) }}
-                onMarqueeSpeedChange={(speed) => { setMarqueeSpeed(speed) }}
-              />
+            <Grid item lg={12}>
+              <Copyright />
+
             </Grid>
           </Grid>
-          <Copyright />
         </Container>
       </ThemeProvider >
     </ConfirmProvider>
+
   );
 }
 export default App;

@@ -38,12 +38,12 @@ const MessageMarquee = (props) => {
     return (
         <>
             <Grid container>
-                <Grid item md={1}
+                <Grid item md={2} xl={.9}
                     sx={{
                         paddingTop: 3,
-                        paddingRight: 0
+                        paddingLeft: 0
                     }}>
-                    <div id="editDeleteButtons">
+                    <div id="editDeleteButtons" >
                         <Tooltip title="Edit Marquee Speed">
                             <IconButton aria-label="settings"
                                 onClick={() => {
@@ -72,7 +72,7 @@ const MessageMarquee = (props) => {
                         </Tooltip>
                     </div>
                 </Grid>
-                <Grid item md={11}>
+                <Grid item md={10} xl={11.1}>
                     <div id="messageInput" hidden>
                         <TextField
                             sx={{
@@ -83,7 +83,7 @@ const MessageMarquee = (props) => {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <Tooltip title="Save Changes"><IconButton
+                                        <Tooltip title={<h1 style={{ color: "lightblue" }}>Save Changes</h1>}><IconButton
                                             onClick={() => {
                                                 toggleMarqueeView("none", "block", "block", "none")
                                             }} >

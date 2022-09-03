@@ -15,8 +15,8 @@ const PromotionTimeTextField = (props) => {
             label={props.label}
             type="time"
             sx={{ width: '100%' }}
-            InputProps={{ style: { fontSize: '150%' } }}
-            InputLabelProps={{ style: { fontSize: '150%' } }}
+            InputProps={{ style: { fontSize: '200%' } }}
+            InputLabelProps={{ style: { fontSize: '200%' } }}
             onChange={(e) => {
                 setActiveTime(e.target.value)
             }}

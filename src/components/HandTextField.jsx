@@ -23,13 +23,13 @@ const HandTextField = (props) => {
                 },
                 label: {
                     color: props.labelColor,
-                    fontSize: '150%'
+                    fontSize: '250%'
                 }
             }}
             inputProps={{ maxlength: 11 }}
             // eslint-disable-next-line 
-            InputProps={{ style: { fontSize: 40 } }}
-            InputLabelProps={{ style: { fontSize: 30 } }}
+            InputProps={{ style: { fontSize: "250%" } }}
+            InputLabelProps={{ style: { fontSize: "250%" } }}
             onChange={(e) => {
                 setHand(e.target.value)
             }}
